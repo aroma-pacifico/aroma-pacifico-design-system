@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aroma Pacifico brand sheet</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<style>
+  body {
+    margin: 0;
+    font-family: var(--ap-font-family-sans);
+    color: var(--ap-color-text-primary);
+    background: var(--ap-color-surface-default);
+  }
+  h1, h2 { margin: 0; }
+  h1 {
+    font-size: var(--ap-typography-web-title-size);
+    line-height: var(--ap-typography-web-title-line-height);
+  }
+  h2 {
+    font-size: var(--ap-typography-web-heading-size);
+    line-height: var(--ap-typography-web-heading-line-height);
+    margin-bottom: var(--ap-space-3);
+  }
+  .sheet { padding: var(--ap-space-6); display: grid; gap: var(--ap-space-6); }
+  .row { display: flex; align-items: center; gap: var(--ap-space-6); padding: var(--ap-space-5); border-radius: var(--ap-radius-lg); }
+  .light { background: var(--ap-color-surface-default); border: var(--ap-border-width-thin) solid var(--ap-color-border-subtle); }
+  .paper { background: var(--ap-color-surface-subtle); }
+  .dark { background: var(--ap-color-surface-brand-strong); color: var(--ap-color-text-inverse); }
+  .caption { font-size: var(--ap-typography-web-caption-size); line-height: var(--ap-typography-web-caption-line-height); }
+  .clear { display: inline-block; padding: var(--ap-space-4); outline: 2px dashed var(--ap-color-border-strong); background: var(--ap-color-brand-primary-50); }
+  .clear img { display: block; }
+  figure { margin: 0; display: grid; gap: var(--ap-space-2); justify-items: start; }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <h1>Aroma Pacifico brand</h1>
+
+  <section>
+    <h2>Full color, on light surfaces</h2>
+    <div class="row light">
+      <img src="../brand/logo.svg" height="128" alt="Aroma Pacifico logo, full color">
+      <img src="../brand/isotype.svg" height="128" alt="Aroma Pacifico isotype, full color">
+      <figure><img src="../brand/logo.svg" height="48" alt="Logo at minimum size"><span class="caption">Logo minimum: 48 px</span></figure>
+      <figure><img src="../brand/isotype.svg" height="24" alt="Isotype at minimum size"><span class="caption">Isotype minimum: 24 px</span></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Single ink</h2>
+    <div class="row paper">
+      <img src="../brand/logo-mono.svg" height="128" alt="Aroma Pacifico logo, single ink">
+      <img src="../brand/isotype-mono.svg" height="128" alt="Aroma Pacifico isotype, single ink">
+      <img src="../brand/isotype-mono.svg" height="24" alt="Isotype single ink at minimum size">
+    </div>
+  </section>
+
+  <section>
+    <h2>Negative, on dark surfaces</h2>
+    <div class="row dark">
+      <img src="../brand/logo-negative.svg" height="128" alt="Aroma Pacifico logo, negative">
+      <img src="../brand/isotype-negative.svg" height="128" alt="Aroma Pacifico isotype, negative">
+      <img src="../brand/isotype-negative.svg" height="24" alt="Isotype negative at minimum size">
+    </div>
+  </section>
+
+  <section>
+    <h2>Clear space: 25 % of the height on every side</h2>
+    <div class="row light">
+      <span class="clear"><img src="../brand/logo.svg" height="64" alt="Logo at 64 px with 16 px clear space"></span>
+      <span class="clear" style="padding: var(--ap-space-2)"><img src="../brand/isotype.svg" height="32" alt="Isotype at 32 px with 8 px clear space"></span>
+    </div>
+  </section>
+</main>
+</body>
+</html>
