@@ -35,7 +35,7 @@ aroma-pacifico-design-system/
 |   |-- alert-card.html           # Crop alerts and delayed timestamp store-and-forward demo
 |   |-- brand-sheet.html          # Brand identity marks and clear space specimen
 |   |-- buyer-lookup.html         # Public sack lookup with ASM-096 data minimization
-|   `-- design-sheet.html         # Master unified design system sheet (1280x3600)
+|   `-- design-sheet.html         # Master unified design system sheet
 |-- icons/
 |   |-- README.md                 # Iconography guide and visual metaphors
 |   |-- alert-triangle.svg        # Warning / crop alerts
@@ -54,11 +54,11 @@ aroma-pacifico-design-system/
 |   |-- truck.svg                 # Transit custody
 |   `-- x-circle.svg              # Rejected status
 |-- previews/
-|   |-- alert-card.png            # Rendered alert card preview (390x900)
-|   |-- brand.png                 # Rendered brand sheet preview (1200x1060)
-|   |-- buyer-lookup-desktop.png  # Rendered desktop buyer lookup preview (1280x1000)
-|   |-- buyer-lookup-phone.png    # Rendered mobile phone buyer lookup preview (390x1240)
-|   `-- design-sheet.png          # Rendered master design sheet preview (1280x3600)
+|   |-- alert-card.png            # Rendered alert card preview (390x1420)
+|   |-- brand.png                 # Rendered brand sheet preview (1200x1100)
+|   |-- buyer-lookup-desktop.png  # Rendered desktop buyer lookup preview (1280x1320)
+|   |-- buyer-lookup-phone.png    # Rendered mobile phone buyer lookup preview (390x2240)
+|   `-- design-sheet.png          # Rendered master design sheet preview (1280x3660)
 |-- scripts/
 |   |-- build-brand.py            # Generates SVG brand marks from shared geometry
 |   |-- build-tokens.py           # Builds tokens.json, tokens.css, contrast-report.md
