@@ -1,0 +1,17 @@
+# Aroma Pacífico Decision Log (Design System)
+
+This log records the architectural decisions and assumptions formulated specifically for the Aroma Pacífico design system (task A24, roadmap issue #37). It utilizes the assigned decision-log block `240-249`.
+
+Assumptions are designated with `ASM-NNN` and pending decisions with `PD-NNN`.
+
+---
+
+## Assumptions Register (Block 240-249)
+
+| ID | Date | Author / Role | Title & Statement | Context & Rationale | Status |
+|---|---|---|---|---|---|
+| ASM-240 | 2026-11-11 | aroma-ux-designer / JR2 | Scope and Deliverable Boundaries of the Design System | Point 7 of the case statement requires a design system for the three applications without building the applications themselves ("No se construyen las aplicaciones. Se entrega el sistema aplicado en una lámina o documento"). Deliverables are bounded to W3C design tokens, CSS custom properties, SVG brand marks, SVG system icons, base UI components, and presentation sheets. No backend or application business logic is implemented. | Active |
+| ASM-241 | 2026-11-11 | aroma-ux-designer / JR2 | Outdoor Visual Ergonomics and Direct Sunlight Contrast | Ambient sunlight in coffee drying patios and Buenaventura port docks frequently exceeds 50,000 lux, causing severe screen glare. The design system mandates WCAG Level AAA (7.0:1) contrast for text and meaningful icons (OUTDOOR-1), 3.0:1 non-text contrast for component borders (OUTDOOR-2), 48x48 px touch targets expanding to 56x56 px for field gloves (OUTDOOR-3), high-reflectance light backgrounds (OUTDOOR-4), and an outdoor high-contrast mode (`data-contrast="outdoor"`) providing 21.0:1 contrast with pure black on pure white (OUTDOOR-8). | Active |
+| ASM-242 | 2026-11-11 | aroma-ux-designer / JR2 | Buyer View Data Minimization and Privacy Architecture | In accordance with ASM-096 and Colombian statutory privacy law (Ley 1581 de 2012), the unauthenticated public sack lookup displays exclusively four data groups: Origin (sack code, department, municipality), Processing Dates (calendar dates of drying start, drying end, packing), Status (current Part C state), and Drying Variables (final moisture %, grain temp min/mean/max). It strictly excludes farmer names, cédula numbers, farm names, exact GPS coordinates, vehicle plates, weighing scale IDs, and purchase prices. | Active |
+| ASM-243 | 2026-11-11 | aroma-ux-designer / JR2 | Iconography Clarity and Cognitive Load Reduction | Point 7 mandates understandable icons that do not require extensive user manuals ("iconos entendibles sin un manual largo"). System icons are constructed on a 24x24 unit grid using uniform 2 px outline vector strokes without rasters or emojis. Metaphors rely strictly on universal physical objects (balance scales for 60 kg sacks, liquid droplets for moisture, column thermometers for temperature, calendar sheets for dates, pin markers for origin). Icons always accompany explicit text labels (OUTDOOR-5). | Active |
+| ASM-244 | 2026-11-11 | aroma-ux-designer / JR2 | Dual-Viewport Responsive Typography and Spatial Grids | The design system defines differentiated type scales for mobile phone handsets (360-412 px width, 4-column layout grid, 16 px gutters) and desktop/web lookup views (12-column layout grid, 24 px gutters, max-width 1200 px). Mobile body text is constrained to a minimum of 16 px to prevent browser auto-zoom, and primary metric numbers (scale mass, moisture, temperature) render at 24-32 px bold display typography for arm's length visibility. | Active |
