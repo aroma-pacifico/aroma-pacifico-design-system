@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aroma Pacifico - Unified Design System Sheet</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--ap-font-family-sans);
+    color: var(--ap-color-text-primary);
+    background-color: var(--ap-color-surface-subtle);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sheet-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--ap-space-6) var(--ap-space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-7);
+  }
+
+  /* Sheet Header */
+  .sheet-header {
+    background-color: var(--ap-color-brand-primary-900);
+    color: var(--ap-color-text-inverse);
+    padding: var(--ap-space-6);
+    border-radius: var(--ap-radius-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sheet-header__title {
+    font-size: var(--ap-typography-web-title-size);
+    font-weight: var(--ap-font-weight-bold);
+    margin: 0 0 var(--ap-space-2) 0;
+  }
+  .sheet-header__subtitle {
+    font-size: var(--ap-typography-web-body-size);
+    color: var(--ap-color-brand-primary-100);
+    max-width: 680px;
+    margin: 0;
+  }
+
+  /* Section Styles */
+  .sheet-section {
+    background-color: var(--ap-color-surface-default);
+    border: var(--ap-border-width-state) solid var(--ap-color-border-subtle);
+    border-radius: var(--ap-radius-lg);
+    padding: var(--ap-space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-5);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: var(--ap-border-width-state) solid var(--ap-color-border-subtle);
+    padding-bottom: var(--ap-space-3);
+  }
+  .section-title {
+    font-size: var(--ap-typography-web-heading-size);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+    margin: 0;
+  }
+  .section-meta {
+    font-size: var(--ap-typography-web-caption-size);
+    color: var(--ap-color-text-secondary);
+  }
+
+  /* Swatch Grids */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--ap-space-3);
+  }
+  .swatch {
+    border-radius: var(--ap-radius-md);
+    border: 1px solid var(--ap-color-border-subtle);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .swatch__color {
+    height: 64px;
+    width: 100%;
+  }
+  .swatch__meta {
+    padding: var(--ap-space-2);
+    background: var(--ap-color-surface-default);
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .swatch__name {
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-text-primary);
+  }
+  .swatch__hex {
+    font-family: var(--ap-font-family-mono);
+    color: var(--ap-color-text-secondary);
+  }
+  .swatch__ratio {
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-action-primary);
+  }
+
+  /* Brand Showcase */
+  .brand-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ap-space-6);
+    padding: var(--ap-space-4);
+    border-radius: var(--ap-radius-md);
+    border: 1px solid var(--ap-color-border-subtle);
+  }
+  .brand-row--dark {
+    background-color: var(--ap-color-brand-primary-900);
+    color: var(--ap-color-text-inverse);
+  }
+
+  /* Icon Grid */
+  .icon-showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--ap-space-3);
+  }
+  .icon-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--ap-space-2);
+    padding: var(--ap-space-3);
+    border: 1px solid var(--ap-color-border-subtle);
+    border-radius: var(--ap-radius-md);
+    text-align: center;
+    background-color: var(--ap-color-surface-subtle);
+  }
+  .icon-box svg {
+    width: 28px;
+    height: 28px;
+    color: var(--ap-color-brand-primary-700);
+  }
+  .icon-box__name {
+    font-size: 12px;
+    font-weight: var(--ap-font-weight-semibold);
+    color: var(--ap-color-text-primary);
+  }
+
+  /* Two Column Layouts */
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--ap-space-5);
+  }
+  @media (max-width: 860px) {
+    .grid-2col { grid-template-columns: 1fr; }
+  }
+
+  /* App Mockups */
+  .mockup-card {
+    background: var(--ap-color-surface-subtle);
+    border: var(--ap-border-width-state) solid var(--ap-color-border-strong);
+    border-radius: var(--ap-radius-lg);
+    padding: var(--ap-space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-4);
+  }
+  .mockup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--ap-border-width-state) solid var(--ap-color-border-subtle);
+    padding-bottom: var(--ap-space-3);
+  }
+  .mockup-title {
+    font-size: var(--ap-typography-web-label-size);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+  }
+  .mockup-tag {
+    font-size: 11px;
+    font-weight: var(--ap-font-weight-bold);
+    padding: 2px 8px;
+    border-radius: var(--ap-radius-pill);
+    background: var(--ap-color-brand-primary-100);
+    color: var(--ap-color-brand-primary-900);
+  }
+
+  /* Rules Table */
+  .rules-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--ap-typography-web-body-size);
+  }
+  .rules-table th, .rules-table td {
+    padding: var(--ap-space-3);
+    border: 1px solid var(--ap-color-border-subtle);
+    text-align: left;
+  }
+  .rules-table th {
+    background-color: var(--ap-color-surface-subtle);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet-container">
+
+  <!-- Main System Header -->
+  <header class="sheet-header">
+    <div>
+      <h1 class="sheet-header__title">Aroma Pacifico &middot; Sistema de Diseno</h1>
+      <p class="sheet-header__subtitle">
+        Especificacion visual y de componentes para las tres aplicaciones del piloto de trazabilidad cafetera 2026: Caficultor (PWA offline-first), Transportador (custodia movil) y Consulta Publica del Saco (vista comprador).
+      </p>
+    </div>
+    <img src="../brand/isotype-negative.svg" width="64" height="64" alt="Isotipo Aroma Pacifico">
+  </header>
+
+  <!-- Section 1: Brand & Identity -->
+  <section class="sheet-section">
+    <div class="section-header">
+      <h2 class="section-title">1. Identidad de Marca y Versiones</h2>
+      <span class="section-meta">Geometria vectorial original &middot; SVG puro sin fuentes ni rasters</span>
+    </div>
+
+    <div class="grid-2col">
+      <div style="display: flex; flex-direction: column; gap: var(--ap-space-3);">
+        <span class="ap-sack-card__label">Color Principal (Fondo Claro)</span>
+        <div class="brand-row">
+          <img src="../brand/logo.svg" height="54" alt="Logo full color">
+          <img src="../brand/isotype.svg" height="48" alt="Isotipo full color">
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--ap-space-3);">
+        <span class="ap-sack-card__label">Negativo (Fondo Oscuro)</span>
+        <div class="brand-row brand-row--dark">
+          <img src="../brand/logo-negative.svg" height="54" alt="Logo negativo">
+          <img src="../brand/isotype-negative.svg" height="48" alt="Isotipo negativo">
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2col">
+      <div style="display: flex; flex-direction: column; gap: var(--ap-space-3);">
+        <span class="ap-sack-card__label">Monocromo / Una Tinta (Impresion y Grabado)</span>
+        <div class="brand-row" style="background: var(--ap-color-neutral-100);">
+          <img src="../brand/logo-mono.svg" height="54" alt="Logo monocromo">
+          <img src="../brand/isotype-mono.svg" height="48" alt="Isotipo monocromo">
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--ap-space-3);">
+        <span class="ap-sack-card__label">Area de Reserva y Tamano Minimo</span>
+        <div class="brand-row" style="gap: var(--ap-space-4); font-size: 13px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="../brand/logo.svg" height="48" alt="Minimo logo">
+            <span>Min. 48 px</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <img src="../brand/isotype.svg" height="24" alt="Minimo isotipo">
+            <span>Min. 24 px</span>
+          </div>
+          <span style="color: var(--ap-color-text-secondary);">Reserva: 25% altura</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Tokens & Color Palette -->
+  <section class="sheet-section">
+    <div class="section-header">
+      <h2 class="section-title">2. Paleta de Color y Contraste WCAG AAA (Al Aire Libre)</h2>
+      <span class="section-meta">48 pares validados por scripts/build-tokens.py &middot; 0 fallas</span>
+    </div>
+
+    <div>
+      <h3 style="font-size: 15px; margin: 0 0 12px 0; color: var(--ap-color-text-primary);">Distintivos de Estado del Saco (Mapeo de los 7 Estados de Plataforma)</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-amber-100); border-bottom: 3px solid var(--ap-color-hue-amber-500);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">En Preparacion</span>
+            <span class="swatch__hex">#FBF1DC / #5C3D00</span>
+            <span class="swatch__ratio">8.82:1 (AAA)</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-blue-100); border-bottom: 3px solid var(--ap-color-hue-blue-500);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">En Viaje</span>
+            <span class="swatch__hex">#E3EEFB / #0B3A6E</span>
+            <span class="swatch__ratio">9.70:1 (AAA)</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-green-100); border-bottom: 3px solid var(--ap-color-hue-green-500);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">Aceptado</span>
+            <span class="swatch__hex">#E2F3E6 / #0F4D22</span>
+            <span class="swatch__ratio">8.64:1 (AAA)</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-red-100); border-bottom: 3px solid var(--ap-color-hue-red-500);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">Rechazado</span>
+            <span class="swatch__hex">#FBE4E2 / #7A1610</span>
+            <span class="swatch__ratio">8.87:1 (AAA)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-size: 15px; margin: 0 0 12px 0; color: var(--ap-color-text-primary);">Niveles de Severidad de Alertas de Cultivo</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-red-700);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">Critica (Solid)</span>
+            <span class="swatch__hex">#9E1C14</span>
+            <span class="swatch__ratio">7.98:1 (AAA)</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-amber-300);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">Precaucion (Solid)</span>
+            <span class="swatch__hex">#F2B33D</span>
+            <span class="swatch__ratio">9.60:1 (AAA)</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-blue-700);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">Aviso (Solid)</span>
+            <span class="swatch__hex">#0B4F8A</span>
+            <span class="swatch__ratio">8.40:1 (AAA)</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-hue-green-700);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">Resuelta (Solid)</span>
+            <span class="swatch__hex">#175A2B</span>
+            <span class="swatch__ratio">8.29:1 (AAA)</span>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__color" style="background-color: var(--ap-color-neutral-700);"></div>
+          <div class="swatch__meta">
+            <span class="swatch__name">Sin Datos (Solid)</span>
+            <span class="swatch__hex">#4A4540</span>
+            <span class="swatch__ratio">9.47:1 (AAA)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: System Iconography -->
+  <section class="sheet-section">
+    <div class="section-header">
+      <h2 class="section-title">3. Iconografia de Sistema (Comprension Inmediata)</h2>
+      <span class="section-meta">Rejilla 24x24 &middot; Trazo uniforme 2px &middot; Sin emojis ni rasters</span>
+    </div>
+
+    <div class="icon-showcase-grid">
+      <div class="icon-box">
+        <img src="../icons/qr-code.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">qr-code</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/scale.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">scale (60 kg)</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/droplet.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">droplet (humedad)</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/thermometer.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">thermometer</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/calendar.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">calendar</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/location.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">location</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/package.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">package (saco)</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/truck.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">truck (viaje)</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/check-circle.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">check-circle</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/alert-triangle.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">alert-triangle</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/x-circle.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">x-circle</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/clock.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">clock (demora)</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/sun.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">sun (exterior)</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/shield-check.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">shield-check</span>
+      </div>
+      <div class="icon-box">
+        <img src="../icons/eye.svg" width="28" height="28" alt="">
+        <span class="icon-box__name">eye (consulta)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Base Components Library -->
+  <section class="sheet-section">
+    <div class="section-header">
+      <h2 class="section-title">4. Biblioteca de Componentes Base</h2>
+      <span class="section-meta">Boton, Campo, Alerta, Tarjeta de Saco y Distintivo de Estado</span>
+    </div>
+
+    <div class="grid-2col">
+      <!-- Buttons & Fields -->
+      <div style="display: flex; flex-direction: column; gap: var(--ap-space-4);">
+        <h3 style="font-size: 15px; margin: 0; color: var(--ap-color-text-primary);">Botones (Objetivo Tactil &ge; 48x48 px)</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--ap-space-3);">
+          <button class="ap-button ap-button--primary" type="button">
+            <img src="../icons/check-circle.svg" width="18" height="18" alt="" class="ap-button__icon">
+            <span>Boton Principal</span>
+          </button>
+          <button class="ap-button ap-button--secondary" type="button">
+            <span>Secundario</span>
+          </button>
+          <button class="ap-button ap-button--danger" type="button">
+            <span>Rechazar</span>
+          </button>
+          <button class="ap-button" disabled type="button">
+            <span>Inactivo</span>
+          </button>
+        </div>
+
+        <h3 style="font-size: 15px; margin: var(--ap-space-3) 0 0 0; color: var(--ap-color-text-primary);">Campos de Formulario</h3>
+        <div class="ap-field">
+          <label class="ap-field__label" for="sample-code">
+            <span>Codigo de Saco Escaneado</span>
+            <span class="ap-field__label-meta">QR</span>
+          </label>
+          <div class="ap-field__control">
+            <input class="ap-input ap-input--code" id="sample-code" value="AP-HUI-2026-0492" readonly>
+          </div>
+        </div>
+
+        <div class="ap-field">
+          <label class="ap-field__label" for="sample-weight">
+            <span>Masa Bruta de Bascula</span>
+            <span class="ap-field__label-meta">Tolerancia &plusmn;2 kg</span>
+          </label>
+          <div class="ap-field__control">
+            <input class="ap-input ap-input--numeric" id="sample-weight" value="60.4">
+            <span class="ap-field__suffix">kg</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges & Card -->
+      <div style="display: flex; flex-direction: column; gap: var(--ap-space-4);">
+        <h3 style="font-size: 15px; margin: 0; color: var(--ap-color-text-primary);">Distintivos de Estado</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--ap-space-2);">
+          <span class="ap-badge ap-badge--in-preparation">
+            <img src="../icons/clock.svg" class="ap-badge__icon" alt="">
+            <span>En Preparacion</span>
+          </span>
+          <span class="ap-badge ap-badge--in-transit">
+            <img src="../icons/truck.svg" class="ap-badge__icon" alt="">
+            <span>En Viaje</span>
+          </span>
+          <span class="ap-badge ap-badge--accepted">
+            <img src="../icons/check-circle.svg" class="ap-badge__icon" alt="">
+            <span>Aceptado</span>
+          </span>
+          <span class="ap-badge ap-badge--rejected">
+            <img src="../icons/x-circle.svg" class="ap-badge__icon" alt="">
+            <span>Rechazado</span>
+          </span>
+        </div>
+
+        <h3 style="font-size: 15px; margin: var(--ap-space-3) 0 0 0; color: var(--ap-color-text-primary);">Tarjeta de Saco (.ap-sack-card)</h3>
+        <div class="ap-sack-card">
+          <div class="ap-sack-card__header">
+            <div class="ap-sack-card__code-wrap">
+              <span class="ap-sack-card__label">Saco 60 kg</span>
+              <span class="ap-sack-card__code">AP-CAU-2026-8F3A</span>
+            </div>
+            <span class="ap-badge ap-badge--in-transit">
+              <img src="../icons/truck.svg" class="ap-badge__icon" alt="">
+              <span>En Viaje</span>
+            </span>
+          </div>
+          <div class="ap-sack-card__body">
+            <div class="ap-sack-card__metric">
+              <span class="ap-sack-card__metric-label">Peso Bascula</span>
+              <div>
+                <span class="ap-sack-card__metric-value">60.2</span>
+                <span class="ap-sack-card__metric-unit">kg</span>
+              </div>
+            </div>
+            <div class="ap-sack-card__metric">
+              <span class="ap-sack-card__metric-label">Humedad Secado</span>
+              <div>
+                <span class="ap-sack-card__metric-value">11.4</span>
+                <span class="ap-sack-card__metric-unit">%</span>
+              </div>
+            </div>
+            <div class="ap-sack-card__metric">
+              <span class="ap-sack-card__metric-label">Procedencia</span>
+              <div style="font-weight: bold; margin-top: 4px;">Piendamo, Cauca</div>
+            </div>
+          </div>
+          <div class="ap-sack-card__footer">
+            <span>Lote Secado: L-2026-08</span>
+            <span>Empacado: 2026-10-24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Outdoor Ergonomics & Contrast Rules -->
+  <section class="sheet-section">
+    <div class="section-header">
+      <h2 class="section-title">5. Reglas de Contraste al Aire Libre (OUTDOOR-1 a OUTDOOR-8)</h2>
+      <span class="section-meta">Ergonomia visual bajo luz solar directa en fincas y puertos</span>
+    </div>
+
+    <table class="rules-table">
+      <thead>
+        <tr>
+          <th>Regla</th>
+          <th>Estandar Tecnico</th>
+          <th>Aplicacion Practica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>OUTDOOR-1</strong></td>
+          <td>Contraste &ge; 7:1 (WCAG AAA) texto e iconos</td>
+          <td>Garantiza lectura sin sombra en secaderos y patios con brillo solar &gt; 50,000 lux.</td>
+        </tr>
+        <tr>
+          <td><strong>OUTDOOR-2</strong></td>
+          <td>Contraste &ge; 3:1 bordes y foco interactivo</td>
+          <td>Bordes de campos y botones de 2 px con contraste frente a fondo para tacto rapido.</td>
+        </tr>
+        <tr>
+          <td><strong>OUTDOOR-3</strong></td>
+          <td>Objetivo tactil 48x48 px (campo 56x56 px)</td>
+          <td>Permite operacion con guantes de cosecha y con una sola mano en campo.</td>
+        </tr>
+        <tr>
+          <td><strong>OUTDOOR-4</strong></td>
+          <td>Fondos claros por defecto (antirreflejo)</td>
+          <td>Evita que las pantallas oscuras actuen como espejo bajo la luz del sol.</td>
+        </tr>
+        <tr>
+          <td><strong>OUTDOOR-5</strong></td>
+          <td>Codificacion redundante (cero solo-color)</td>
+          <td>Cada color de estado va obligatoriamente acompanado de icono y texto explicito.</td>
+        </tr>
+        <tr>
+          <td><strong>OUTDOOR-6</strong></td>
+          <td>Indicador de foco visible de 3 px</td>
+          <td>Anillo exterior contrastado para navegacion accesible y teclado.</td>
+        </tr>
+        <tr>
+          <td><strong>OUTDOOR-7</strong></td>
+          <td>Tipografia base &ge; 16 px &middot; Metricas &ge; 24 px</td>
+          <td>Legibilidad del peso de bascula y codigo a distancia de un brazo.</td>
+        </tr>
+        <tr>
+          <td><strong>OUTDOOR-8</strong></td>
+          <td>Modo Alto Contraste Exterior (21:1)</td>
+          <td>Negro puro (#000000) sobre blanco puro (#FFFFFF) con bordes de 3 px activable al sol.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 6: Applied to the Three Applications -->
+  <section class="sheet-section">
+    <div class="section-header">
+      <h2 class="section-title">6. El Sistema Aplicado en las Tres Aplicaciones</h2>
+      <span class="section-meta">Flujos grounded en docs/architecture.md &middot; Sin construir apps</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--ap-space-4);">
+
+      <!-- App 1: Coffee Grower -->
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <div>
+            <div class="mockup-title">1. App Caficultor (PWA)</div>
+            <div style="font-size: 11px; color: var(--ap-color-text-secondary);">Registro de Saco en Beneficiadero</div>
+          </div>
+          <span class="mockup-tag">Offline-First</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="ap-field">
+            <span class="ap-field__label">Lote de Secado Activo</span>
+            <input class="ap-input" value="Lote Secadero 04 (Cafe Pergamino)" readonly>
+          </div>
+          <div class="ap-field">
+            <span class="ap-field__label">Peso Registrado</span>
+            <div class="ap-field__control">
+              <input class="ap-input ap-input--numeric" value="60.5">
+              <span class="ap-field__suffix">kg</span>
+            </div>
+          </div>
+          <button class="ap-button ap-button--primary ap-button--large ap-button--full-width" type="button">
+            <img src="../icons/qr-code.svg" width="20" height="20" alt="" class="ap-button__icon">
+            <span>Escanear QR de Rotulo</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- App 2: Transporter -->
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <div>
+            <div class="mockup-title">2. App Transportador</div>
+            <div style="font-size: 11px; color: var(--ap-color-text-secondary);">Seguimiento y Custodia en Ruta</div>
+          </div>
+          <span class="mockup-tag">GPS 5 min</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: white; border-radius: 6px; border: 1px solid var(--ap-color-border-subtle);">
+            <span>Viaje: V-2026-081</span>
+            <span class="ap-badge ap-badge--in-transit" style="min-height: 26px; font-size: 10px;">En Ruta</span>
+          </div>
+          <div style="font-size: 12px; color: var(--ap-color-text-secondary);">
+            Carga: 40 sacos de 60 kg (2,410 kg)<br>
+            Ultimo fix GNSS: Vía Panamericana km 42 (09:40)
+          </div>
+          <button class="ap-button ap-button--secondary ap-button--full-width" type="button">
+            <img src="../icons/truck.svg" width="20" height="20" alt="" class="ap-button__icon">
+            <span>Confirmar Entrega en Acopio</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- App 3: Buyer View -->
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <div>
+            <div class="mockup-title">3. Consulta Publica</div>
+            <div style="font-size: 11px; color: var(--ap-color-text-secondary);">Vista del Comprador (ASM-096)</div>
+          </div>
+          <span class="mockup-tag">Minimizacion</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="padding: 8px; background: white; border-radius: 6px; border: 1px solid var(--ap-color-border-subtle); font-size: 12px;">
+            <strong>Origen:</strong> Piendamo, Cauca<br>
+            <strong>Secado:</strong> 2026-10-18 al 2026-10-25<br>
+            <strong>Humedad:</strong> 11.2% | <strong>Temp. Media:</strong> 21.6 &deg;C<br>
+            <strong>Dictamen:</strong> Aceptado en Puerto
+          </div>
+          <div class="ap-minimization-card" style="padding: 8px; font-size: 11px;">
+            <div class="ap-minimization-card__header" style="font-size: 12px;">
+              <img src="../icons/shield-check.svg" width="16" height="16" alt="">
+              <span>Privacidad Garantizada</span>
+            </div>
+            <span>Sin datos personales, nombres de finca ni cedula cafetera.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
