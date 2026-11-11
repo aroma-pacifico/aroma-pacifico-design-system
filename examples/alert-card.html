@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aroma Pacifico - Crop Alerts & Field Cards</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  body {
+    margin: 0;
+    padding: var(--ap-space-4);
+    font-family: var(--ap-font-family-sans);
+    color: var(--ap-color-text-primary);
+    background-color: var(--ap-color-surface-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-4);
+    box-sizing: border-box;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--ap-space-3);
+    border-bottom: var(--ap-border-width-state) solid var(--ap-color-border-subtle);
+  }
+  .app-header__title {
+    font-size: var(--ap-typography-phone-title-size);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+  }
+  .app-header__meta {
+    font-size: var(--ap-typography-phone-caption-size);
+    color: var(--ap-color-text-secondary);
+  }
+
+  .section-title {
+    font-size: var(--ap-typography-phone-label-size);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: var(--ap-space-2) 0 0 0;
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div>
+    <div class="app-header__title">Alertas de Cultivo</div>
+    <div class="app-header__meta">Finca El Mirador &middot; Lote 2 &middot; Tolima</div>
+  </div>
+  <img src="../brand/isotype.svg" width="36" height="36" alt="Isotype">
+</header>
+
+<h2 class="section-title">Alertas Activas (Cauca, Huila, Tolima)</h2>
+
+<!-- 1. Critical Severity Alert -->
+<div class="ap-alert ap-alert--critical">
+  <img src="../icons/alert-triangle.svg" class="ap-alert__icon" alt="">
+  <div class="ap-alert__content">
+    <div class="ap-alert__title">Alerta Critica: Broca Detectada</div>
+    <div class="ap-alert__message">Umbral de infestacion superado (4.2%). Mision de dron solicitada para confirmacion de foco.</div>
+    <div class="ap-alert__timestamps">
+      <span class="ap-alert__timestamp-item">
+        <img src="../icons/clock.svg" width="14" height="14" alt="">
+        <span>Medido: Hoy 06:15</span>
+      </span>
+      <span class="ap-alert__timestamp-item">
+        <span>Recibido: Hoy 06:18</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. Caution Severity Alert with Delayed Timestamp (No Signal Store-and-Forward) -->
+<div class="ap-alert ap-alert--caution">
+  <img src="../icons/alert-triangle.svg" class="ap-alert__icon" alt="">
+  <div class="ap-alert__content">
+    <div class="ap-alert__title">Precaucion: Humedad Relativa Alta</div>
+    <div class="ap-alert__message">Humedad en secadero superior a 85% durante 6 horas continuas. Riesgo de condensacion.</div>
+    <div class="ap-alert__timestamps">
+      <span class="ap-alert__timestamp-item">
+        <img src="../icons/clock.svg" width="14" height="14" alt="">
+        <span>Medido: Ayer 21:30</span>
+      </span>
+      <span class="ap-alert__timestamp-item" style="color: var(--ap-color-hue-amber-700); font-weight: bold;">
+        <span>Recibido: Hoy 08:05 (Drenado bufer)</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Notice Severity Alert -->
+<div class="ap-alert ap-alert--notice">
+  <img src="../icons/clock.svg" class="ap-alert__icon" alt="">
+  <div class="ap-alert__content">
+    <div class="ap-alert__title">Notificacion: Ventana de Vuelo Programada</div>
+    <div class="ap-alert__message">Operador de dron autorizado iniciara mision de estimacion de cosecha manana 07:00.</div>
+    <div class="ap-alert__timestamps">
+      <span class="ap-alert__timestamp-item">
+        <span>Publicado: Hoy 09:30</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Resolved Severity Alert -->
+<div class="ap-alert ap-alert--resolved">
+  <img src="../icons/check-circle.svg" class="ap-alert__icon" alt="">
+  <div class="ap-alert__content">
+    <div class="ap-alert__title">Resuelto: Temperatura de Grano Estabilizada</div>
+    <div class="ap-alert__message">Temperatura de secado retornada a banda optima (22.4 &deg;C). Lote de secado seguro.</div>
+    <div class="ap-alert__timestamps">
+      <span class="ap-alert__timestamp-item">
+        <span>Cerrado: Hoy 10:15</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- 5. No-Data Severity Alert (Silent Node > 24 Hours) -->
+<div class="ap-alert ap-alert--no-data">
+  <img src="../icons/x-circle.svg" class="ap-alert__icon" alt="">
+  <div class="ap-alert__content">
+    <div class="ap-alert__title">Sin Datos: Nodo N-04 Sin Telemetria</div>
+    <div class="ap-alert__message">Nodo de cultivo sin reporte por mas de 24 horas. Verifique bateria solar o linea de vista.</div>
+    <div class="ap-alert__timestamps">
+      <span class="ap-alert__timestamp-item">
+        <span>Ultimo reporte: 26 horas atras</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Field Actions -->
+<div style="display: flex; flex-direction: column; gap: var(--ap-space-2); margin-top: var(--ap-space-3);">
+  <button class="ap-button ap-button--primary ap-button--large ap-button--full-width" type="button">
+    <img src="../icons/check-circle.svg" width="20" height="20" alt="" class="ap-button__icon">
+    <span>Confirmar Inspeccion de Campo</span>
+  </button>
+  <button class="ap-button ap-button--secondary ap-button--full-width" type="button">
+    <img src="../icons/truck.svg" width="20" height="20" alt="" class="ap-button__icon">
+    <span>Solicitar Revision de Agronomo</span>
+  </button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aroma Pacifico - Public Sack Traceability Lookup</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../components/components.css">
+<style>
+  :root {
+    --max-content-width: 860px;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--ap-font-family-sans);
+    color: var(--ap-color-text-primary);
+    background-color: var(--ap-color-surface-subtle);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app-header {
+    background-color: var(--ap-color-surface-default);
+    border-bottom: var(--ap-border-width-state) solid var(--ap-color-border-subtle);
+    padding: var(--ap-space-3) var(--ap-space-4);
+  }
+  .app-header__inner {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .app-header__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--ap-space-3);
+    text-decoration: none;
+    color: var(--ap-color-text-primary);
+  }
+  .app-header__title {
+    font-size: var(--ap-typography-web-label-size);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+  }
+  .app-header__subtitle {
+    font-size: var(--ap-typography-web-caption-size);
+    color: var(--ap-color-text-secondary);
+  }
+
+  .main-content {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: var(--ap-space-5) var(--ap-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-5);
+  }
+
+  /* Search bar */
+  .search-card {
+    background: var(--ap-color-surface-default);
+    border: var(--ap-border-width-state) solid var(--ap-color-border-subtle);
+    border-radius: var(--ap-radius-lg);
+    padding: var(--ap-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .search-row {
+    display: flex;
+    gap: var(--ap-space-3);
+  }
+  .search-row .ap-input {
+    flex: 1;
+  }
+
+  /* Result Sheet */
+  .result-sheet {
+    background: var(--ap-color-surface-default);
+    border: var(--ap-border-width-state) solid var(--ap-color-border-strong);
+    border-radius: var(--ap-radius-lg);
+    padding: var(--ap-space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-5);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .result-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--ap-space-3);
+    padding-bottom: var(--ap-space-4);
+    border-bottom: var(--ap-border-width-state) solid var(--ap-color-border-subtle);
+  }
+  .result-header__code-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-1);
+  }
+  .result-header__badge-row {
+    display: flex;
+    align-items: center;
+    gap: var(--ap-space-2);
+  }
+
+  /* 4 Data Groups */
+  .data-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--ap-space-4);
+  }
+
+  .data-group {
+    background: var(--ap-color-surface-subtle);
+    border: var(--ap-border-width-thin) solid var(--ap-color-border-subtle);
+    border-radius: var(--ap-radius-md);
+    padding: var(--ap-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-3);
+  }
+
+  .data-group__header {
+    display: flex;
+    align-items: center;
+    gap: var(--ap-space-2);
+    font-size: var(--ap-typography-web-label-size);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+    padding-bottom: var(--ap-space-2);
+    border-bottom: 1px solid var(--ap-color-border-subtle);
+  }
+  .data-group__icon {
+    width: 20px;
+    height: 20px;
+    color: var(--ap-color-action-primary);
+  }
+
+  .data-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-2);
+  }
+  .data-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: var(--ap-typography-web-body-size);
+  }
+  .data-item__label {
+    color: var(--ap-color-text-secondary);
+    font-size: var(--ap-typography-web-caption-size);
+  }
+  .data-item__val {
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-text-primary);
+  }
+  .data-item__val--mono {
+    font-family: var(--ap-font-family-mono);
+  }
+
+  /* Highlight metrics */
+  .metric-highlight {
+    display: flex;
+    align-items: baseline;
+    gap: var(--ap-space-1);
+  }
+  .metric-highlight__val {
+    font-size: 28px;
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+    line-height: 1;
+  }
+  .metric-highlight__unit {
+    font-size: 14px;
+    font-weight: var(--ap-font-weight-medium);
+    color: var(--ap-color-text-secondary);
+  }
+
+  /* Privacy Notice */
+  .privacy-notice {
+    background-color: var(--ap-color-brand-primary-50);
+    border: var(--ap-border-width-state) solid var(--ap-color-brand-primary-700);
+    border-radius: var(--ap-radius-md);
+    padding: var(--ap-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ap-space-2);
+  }
+  .privacy-notice__title {
+    display: flex;
+    align-items: center;
+    gap: var(--ap-space-2);
+    font-size: var(--ap-typography-web-label-size);
+    font-weight: var(--ap-font-weight-bold);
+    color: var(--ap-color-brand-primary-900);
+  }
+  .privacy-notice__text {
+    font-size: var(--ap-typography-web-caption-size);
+    color: var(--ap-color-text-primary);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .privacy-notice__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--ap-typography-web-caption-size);
+    margin-top: var(--ap-space-2);
+  }
+  .privacy-notice__table th,
+  .privacy-notice__table td {
+    padding: var(--ap-space-2);
+    border: 1px solid var(--ap-color-brand-primary-100);
+    text-align: left;
+  }
+  .privacy-notice__table th {
+    background-color: var(--ap-color-brand-primary-100);
+    color: var(--ap-color-brand-primary-900);
+    font-weight: var(--ap-font-weight-bold);
+  }
+
+  .footer {
+    text-align: center;
+    padding: var(--ap-space-4) 0;
+    font-size: var(--ap-typography-web-caption-size);
+    color: var(--ap-color-text-secondary);
+  }
+
+  /* Contrast switch */
+  .contrast-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--ap-space-2);
+    font-size: var(--ap-typography-web-caption-size);
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header__inner">
+    <a href="#" class="app-header__brand">
+      <img src="../brand/isotype.svg" width="32" height="32" alt="Aroma Pacifico Isotype">
+      <div>
+        <div class="app-header__title">Aroma Pacifico</div>
+        <div class="app-header__subtitle">Consulta Publica de Trazabilidad</div>
+      </div>
+    </a>
+    <button class="ap-button ap-button--secondary" onclick="toggleOutdoor()" style="min-height: 38px; padding: 4px 12px; font-size: 13px;">
+      <img src="../icons/sun.svg" width="16" height="16" alt="" class="ap-button__icon">
+      <span id="contrast-label">Modo Exterior (AAA)</span>
+    </button>
+  </div>
+</header>
+
+<main class="main-content">
+
+  <!-- Lookup Search Bar -->
+  <section class="search-card">
+    <label class="ap-field__label" for="sack-input">
+      <span>Codigo del Saco de Cafe (60 kg)</span>
+      <span class="ap-field__label-meta">80 bits / Base32</span>
+    </label>
+    <div class="search-row">
+      <div class="ap-field__control">
+        <input class="ap-input ap-input--code" id="sack-input" type="text" value="AP-7F2A-9C4B-E1D8" spellcheck="false" autocomplete="off">
+      </div>
+      <button class="ap-button ap-button--primary" type="button">
+        <img src="../icons/qr-code.svg" width="20" height="20" alt="" class="ap-button__icon">
+        <span>Consultar</span>
+      </button>
+    </div>
+    <div class="ap-field__hint">Ingrese el codigo alfanumerico o escanee el codigo QR impreso en el saco.</div>
+  </section>
+
+  <!-- Buyer View Result Sheet -->
+  <article class="result-sheet">
+
+    <div class="result-header">
+      <div class="result-header__code-group">
+        <span class="ap-sack-card__label">Saco Verificado</span>
+        <span class="ap-sack-card__code">AP-7F2A-9C4B-E1D8</span>
+      </div>
+      <div class="result-header__badge-row">
+        <span class="ap-badge ap-badge--accepted">
+          <img src="../icons/check-circle.svg" class="ap-badge__icon" alt="">
+          <span>Aceptado en Puerto</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- The 4 Data Groups Mandated by ASM-096 -->
+    <div class="data-groups-grid">
+
+      <!-- Group 1: Origin -->
+      <div class="data-group">
+        <div class="data-group__header">
+          <img src="../icons/location.svg" class="data-group__icon" alt="">
+          <span>1. Origen Territorial</span>
+        </div>
+        <ul class="data-list">
+          <li class="data-item">
+            <span class="data-item__label">Departamento</span>
+            <span class="data-item__val">Cauca</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Municipio</span>
+            <span class="data-item__val">Piendamo</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Codigo Saco</span>
+            <span class="data-item__val data-item__val--mono">AP-7F2A-9C4B</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 2: Processing Dates -->
+      <div class="data-group">
+        <div class="data-group__header">
+          <img src="../icons/calendar.svg" class="data-group__icon" alt="">
+          <span>2. Fechas de Proceso</span>
+        </div>
+        <ul class="data-list">
+          <li class="data-item">
+            <span class="data-item__label">Inicio Secado</span>
+            <span class="data-item__val data-item__val--mono">2026-10-18</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Fin Secado</span>
+            <span class="data-item__val data-item__val--mono">2026-10-25</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Fecha Empaque</span>
+            <span class="data-item__val data-item__val--mono">2026-10-28</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 3: Status -->
+      <div class="data-group">
+        <div class="data-group__header">
+          <img src="../icons/truck.svg" class="data-group__icon" alt="">
+          <span>3. Estado del Saco</span>
+        </div>
+        <ul class="data-list">
+          <li class="data-item">
+            <span class="data-item__label">Estado Actual</span>
+            <span class="data-item__val">Entregado en Puerto</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Dictamen de Calidad</span>
+            <span class="data-item__val">Aceptado</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Destino</span>
+            <span class="data-item__val">Puerto Buenaventura</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 4: Drying Variables -->
+      <div class="data-group">
+        <div class="data-group__header">
+          <img src="../icons/droplet.svg" class="data-group__icon" alt="">
+          <span>4. Variables de Secado</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="data-item__label">Humedad Final Grano</span>
+          <div class="metric-highlight">
+            <span class="metric-highlight__val">11.2</span>
+            <span class="metric-highlight__unit">%</span>
+          </div>
+        </div>
+        <ul class="data-list">
+          <li class="data-item">
+            <span class="data-item__label">Temp. Minima Grano</span>
+            <span class="data-item__val">18.4 &deg;C</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Temp. Media Grano</span>
+            <span class="data-item__val">21.6 &deg;C</span>
+          </li>
+          <li class="data-item">
+            <span class="data-item__label">Temp. Maxima Grano</span>
+            <span class="data-item__val">24.8 &deg;C</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Data Minimization Guarantee (ASM-096 / Statutory Compliance) -->
+    <section class="privacy-notice">
+      <div class="privacy-notice__title">
+        <img src="../icons/shield-check.svg" width="20" height="20" alt="">
+        <span>Garantia de Minimizacion de Datos (ASM-096)</span>
+      </div>
+      <p class="privacy-notice__text">
+        En cumplimiento del caso de estudio punto 7 ("la vista del comprador sin datos de mas") y el estandar legal de proteccion de datos (Ley 1581 de 2012), la consulta publica muestra exclusivamente la informacion tecnica requerida para certificar origen y calidad sin exponer datos personales ni secretos comerciales.
+      </p>
+      <table class="privacy-notice__table">
+        <thead>
+          <tr>
+            <th>Datos Incluidos (Vista Comprador)</th>
+            <th>Datos Excluidos (Privacidad Protegida)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Departamento y municipio de procedencia</td>
+            <td>Nombre del caficultor y cedula cafetera</td>
+          </tr>
+          <tr>
+            <td>Fechas calendario de secado y empaque</td>
+            <td>Nombre de la finca y coordenadas GPS exactas</td>
+          </tr>
+          <tr>
+            <td>Estado publico de recepcion y entrega</td>
+            <td>Placa del vehiculo y ruta del transportador</td>
+          </tr>
+          <tr>
+            <td>Humedad final y temperaturas de secado</td>
+            <td>Precio de compra y condiciones comerciales</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </article>
+
+  <footer class="footer">
+    Aroma Pacifico Pilot 2026 &middot; Federacion Nacional de Cafeteros &middot; Cauca, Huila y Tolima
+  </footer>
+
+</main>
+
+<script>
+  function toggleOutdoor() {
+    const isOutdoor = document.documentElement.getAttribute('data-contrast') === 'outdoor';
+    if (isOutdoor) {
+      document.documentElement.removeAttribute('data-contrast');
+      document.getElementById('contrast-label').textContent = 'Modo Exterior (AAA)';
+    } else {
+      document.documentElement.setAttribute('data-contrast', 'outdoor');
+      document.getElementById('contrast-label').textContent = 'Modo Normal';
+    }
+  }
+</script>
+
+</body>
+</html>
