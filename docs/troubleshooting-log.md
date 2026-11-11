@@ -55,3 +55,19 @@ Elevated the project-wide outdoor text contrast mandate (OUTDOOR-1) to WCAG Leve
 
 ### Preventive Architecture
 Automated script `scripts/build-tokens.py` calculates relative luminance across all 48 semantic token pairs and triggers a build failure if any pair falls below 7.0:1 for text or 3.0:1 for non-text boundaries.
+
+---
+
+## Entry 4: Viewport Truncation in Headless Chrome Raster Previews
+
+### Context & Symptom
+Visual inspection of PNG preview artifacts during the A24 pre-delivery audit revealed that `alert-card.png`, `buyer-lookup-phone.png`, and `buyer-lookup-desktop.png` were truncated along their bottom bounds. Specifically, `alert-card.png` was truncated at 900 px (cutting off the resolved alert card and omitting both the silent node alert and field buttons), while phone and desktop buyer lookups truncated the statutory data minimization guarantee and comparison table.
+
+### Root Cause
+Headless Google Chrome `--screenshot` captures the viewport window size specified via `--window-size="$width,$height"`. When page content exceeds the hardcoded window height, content extending beyond the viewport boundary is silently clipped from the raster artifact.
+
+### Resolution Applied
+Measured exact document `scrollHeight` under target viewports using headless Chrome. Recalibrated `scripts/render-previews.sh` heights (`alert-card`: 1420 px, `buyer-lookup-phone`: 2240 px, `buyer-lookup-desktop`: 1320 px, `brand`: 1100 px, `design-sheet`: 3660 px) and regenerated all preview PNGs. In addition, aligned `examples/brand-sheet.html` single-ink and negative sections to present 48 px minimum logo and 24 px isotype figures with clear captions.
+
+### Preventive Architecture
+Headless preview scripts must calculate or bound window heights against actual document scroll geometry, ensuring full document capture without bottom clipping in visual inspection artifacts.

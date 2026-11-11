@@ -10,11 +10,11 @@ mkdir -p "$out"
 
 # name  page  width  height
 pages=(
-  "brand examples/brand-sheet.html 1200 1060"
-  "design-sheet examples/design-sheet.html 1280 3600"
-  "buyer-lookup-phone examples/buyer-lookup.html 390 1240"
-  "buyer-lookup-desktop examples/buyer-lookup.html 1280 1000"
-  "alert-card examples/alert-card.html 390 900"
+  "brand examples/brand-sheet.html 1200 1100"
+  "design-sheet examples/design-sheet.html 1280 3660"
+  "buyer-lookup-phone examples/buyer-lookup.html 390 2240"
+  "buyer-lookup-desktop examples/buyer-lookup.html 1280 1320"
+  "alert-card examples/alert-card.html 390 1420"
 )
 
 for entry in "${pages[@]}"; do
